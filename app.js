@@ -1,13 +1,14 @@
 import express from "express"
 import { PrismaClient } from '@prisma/client'
+import cors from "cors"
 
 const prisma = new PrismaClient()
 const app = express()
 app.use(express.json())
+app.use(cors())
 
 
 // Middleware de validação
-
 function validarUsuario(req, res, next) {
 
     const {name, email} = req.body
@@ -24,12 +25,12 @@ function validarUsuario(req, res, next) {
 }
 
 // Middleware pra validar ID
-
 function validarId(req, res, next) {
 
     const {id} = req.params
+    console.log("ID recebido:", id)
 
-    if(!id || id !== 24) {
+    if(!id) {
         return res.status(400).json({message: "ID inválido."})
     }
 
@@ -60,10 +61,6 @@ app.get("/usuarios/:id", validarId,  async (req, res) => {
             where: {id}
         })
 
-        if(!listarUsuarioID) {
-            return res.status(404).json({message: "Usuário não encontrado."})
-        }
-
         res.status(200).json(listarUsuarioID)
 
     }catch(error) {
@@ -77,7 +74,9 @@ app.get("/usuarios/:id", validarId,  async (req, res) => {
 app.post("/usuarios", validarUsuario, async (req, res) => {
 
     try {
-        const {name, email, image} = req.body
+        const {name, email} = req.body
+
+        const image = `https://robohash.org/${encodeURIComponent(email)}`
         const criarUsuarios = await prisma.user.create({
             data: {
                 name,
@@ -122,6 +121,7 @@ app.put("/usuarios/:id", validarId, validarUsuario, async (req, res) => {
 app.delete("/usuarios/:id", validarId, async (req, res) => {
 
     try {
+        const {id} = req.params
         const deletarUsuarios = await prisma.user.delete({
             where: {id}
         })

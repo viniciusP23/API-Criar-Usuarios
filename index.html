@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="estilo.css">
+    <title>Login</title>
+</head>
+
+<body>
+
+    <form id="formUser" action="">
+
+        <div class="content">
+            <input id="nome" type="text" placeholder="Digite seu nome">
+            <input id="email" type="email" placeholder="Digite seu E-mail">
+        </div>
+
+        <button onclick="criarUsuario()">Adicionar</button>
+
+        <ul id="listarUsuarios"></ul>
+    </form>
+
+</body>
+<script>
+
+    async function criarUsuario() {
+
+        const nome = document.getElementById("nome").value
+        const email = document.getElementById("email").value
+
+        await fetch("http://localhost:3000/usuarios", {
+
+            method: "POST",
+
+            headers: { "Content-Type": "application/json" },
+
+            body: JSON.stringify({
+                name: nome,
+                email: email
+            })
+        })
+    }
+
+    async function listarUsuarios() {
+
+        const response = await fetch("http://localhost:3000/usuarios")
+        const users = await response.json()
+
+        const lista = document.getElementById("listarUsuarios")
+
+        lista.innerHTML = ""
+
+        users.forEach(user => {
+
+            const li = document.createElement("li")
+
+            const nome = document.createElement("p")
+            nome.textContent = `${user.name} - ${user.email}`
+
+            const img = document.createElement("img")
+            img.src = user.image
+            img.width = 100
+
+            li.appendChild(nome)
+            li.appendChild(img)
+
+            lista.appendChild(li)
+
+        });
+    }
+    listarUsuarios()
+
+
+</script>
+
+</html>
