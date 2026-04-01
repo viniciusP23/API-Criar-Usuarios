@@ -17,9 +17,9 @@
             <input id="email" type="email" placeholder="Digite seu E-mail">
         </div>
 
-        <button onclick="criarUsuario()">Adicionar</button>
+        <button id="btn" onclick="criarUsuario()">Adicionar</button>
 
-        <ul id="listarUsuarios"></ul>
+        <div id="listarUsuarios"></div>
     </form>
 
 </body>
@@ -41,6 +41,8 @@
                 email: email
             })
         })
+
+        listarUsuarios()
     }
 
     async function listarUsuarios() {
@@ -54,19 +56,38 @@
 
         users.forEach(user => {
 
-            const li = document.createElement("li")
+            const card = document.createElement("div")
+            card.classList.add("card")
 
             const nome = document.createElement("p")
-            nome.textContent = `${user.name} - ${user.email}`
+            nome.textContent = `Nome: ${user.name}`
+
+            const email = document.createElement("p")
+            email.textContent = `E-mail: ${user.email}`
 
             const img = document.createElement("img")
             img.src = user.image
-            img.width = 100
+            
+            card.appendChild(img)
+            card.appendChild(nome)
+            card.appendChild(email)
 
-            li.appendChild(nome)
-            li.appendChild(img)
+            lista.appendChild(card)
 
-            lista.appendChild(li)
+            // const li = document.createElement("li")
+
+            // const nome = document.createElement("p")
+            // nome.textContent = `Nome:${user.name} - E-mail:${user.email}`
+
+            // const img = document.createElement("img")
+            // img.src = user.image
+            // img.width = 100
+
+            // li.appendChild(img)
+            // li.appendChild(nome)
+            
+
+            // lista.appendChild(li)
 
         });
     }

@@ -16,8 +16,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: aqua;
     padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #000;
 }
 
 .content {
@@ -26,7 +27,51 @@ body {
     gap: 5px;
 }
 
-.content input {
+.content input{
     padding: 10px;
     width: 400px;
+    border: none;            
+    border-bottom: 2px solid rgb(25, 70, 167); 
 }
+
+#listarUsuarios {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+    
+}
+
+#btn {
+    margin-top: 10px;
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(25, 70, 167);
+    color: #fff;
+    cursor: pointer;
+    transition: 0.5s;
+}
+
+#btn:hover {
+    opacity: 0.8;
+}
+
+img {
+    width: 100px;
+    background-color: rgb(66, 98, 167);
+    border-radius: 5px;
+}
+
+.card {
+    display: flex;
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background: #f9f9f9;
+}
+
