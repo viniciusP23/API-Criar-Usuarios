@@ -5,10 +5,10 @@
 }
 
 body {
-    height: 100vh;
+    padding: 10px;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; 
 }
 
 #formUser {
@@ -31,7 +31,12 @@ body {
     padding: 10px;
     width: 400px;
     border: none;            
-    border-bottom: 2px solid rgb(25, 70, 167); 
+    border-bottom: 2px solid rgb(25, 70, 167);
+    font-size: 18px
+}
+
+input:focus {
+    outline: none;
 }
 
 #listarUsuarios {
@@ -39,11 +44,10 @@ body {
     display: flex;
     gap: 10px;
     flex-direction: column;
-    
 }
 
 #btn {
-    margin-top: 10px;
+    margin-top: 20px;
     width: 300px;
     padding: 10px;
     font-size: 16px;
@@ -73,5 +77,22 @@ img {
     margin: 10px 0;
     border-radius: 8px;
     background: #f9f9f9;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    transition: 0.5s;
 }
 
+.card:hover {
+    transform: scale(1.05);
+}
+
+.text-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+    gap: 5px;
+}
+
+.text-div p {
+    font-size: 18px;
+}

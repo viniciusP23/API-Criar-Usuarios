@@ -59,6 +59,9 @@
             const card = document.createElement("div")
             card.classList.add("card")
 
+            const divText = document.createElement("div")
+            divText.classList.add("text-div")
+
             const nome = document.createElement("p")
             nome.textContent = `Nome: ${user.name}`
 
@@ -69,26 +72,12 @@
             img.src = user.image
             
             card.appendChild(img)
-            card.appendChild(nome)
-            card.appendChild(email)
+            divText.appendChild(nome)
+            divText.appendChild(email)
+
+            card.appendChild(divText)
 
             lista.appendChild(card)
-
-            // const li = document.createElement("li")
-
-            // const nome = document.createElement("p")
-            // nome.textContent = `Nome:${user.name} - E-mail:${user.email}`
-
-            // const img = document.createElement("img")
-            // img.src = user.image
-            // img.width = 100
-
-            // li.appendChild(img)
-            // li.appendChild(nome)
-            
-
-            // lista.appendChild(li)
-
         });
     }
     listarUsuarios()
