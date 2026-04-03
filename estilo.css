@@ -64,7 +64,7 @@ input:focus {
     opacity: 0.8;
 }
 
-img {
+.img-foto{
     width: 100px;
     background-color: rgb(66, 98, 167);
     border-radius: 5px;
@@ -73,6 +73,7 @@ img {
 .card {
     display: flex;
     border: 1px solid #ccc;
+    justify-content: space-between;
     padding: 10px;
     margin: 10px 0;
     border-radius: 8px;
@@ -95,4 +96,19 @@ img {
 
 .text-div p {
     font-size: 18px;
+}
+
+.deleteUsuario{
+    border: none;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+.deleteUsuario:hover {
+    transform: scale(1.2);
+}
+
+.img-remove {
+    width: 40px;
+    cursor: pointer;
 }

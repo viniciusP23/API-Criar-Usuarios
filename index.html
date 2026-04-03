@@ -17,9 +17,10 @@
             <input id="email" type="email" placeholder="Digite seu E-mail">
         </div>
 
-        <button id="btn" onclick="criarUsuario()">Adicionar</button>
+        <button type="button" id="btn" onclick="criarUsuario()">Adicionar</button>
 
-        <div id="listarUsuarios"></div>
+        <div id="listarUsuarios">
+        </div>
     </form>
 
 </body>
@@ -27,8 +28,8 @@
 
     async function criarUsuario() {
 
-        const nome = document.getElementById("nome").value
-        const email = document.getElementById("email").value
+        const nome = document.getElementById("nome").value;
+        const email = document.getElementById("email").value;
 
         await fetch("http://localhost:3000/usuarios", {
 
@@ -42,47 +43,72 @@
             })
         })
 
-        listarUsuarios()
+        listarUsuarios();
+
+        document.getElementById("formUser").reset();
     }
 
     async function listarUsuarios() {
 
-        const response = await fetch("http://localhost:3000/usuarios")
-        const users = await response.json()
+        const response = await fetch("http://localhost:3000/usuarios");
+        const users = await response.json();
 
-        const lista = document.getElementById("listarUsuarios")
+        const lista = document.getElementById("listarUsuarios");
 
-        lista.innerHTML = ""
+        lista.innerHTML = "";
 
         users.forEach(user => {
 
-            const card = document.createElement("div")
-            card.classList.add("card")
+            const card = document.createElement("div");
+            card.classList.add("card");
 
-            const divText = document.createElement("div")
-            divText.classList.add("text-div")
+            const divText = document.createElement("div");
+            divText.classList.add("text-div");
 
-            const nome = document.createElement("p")
-            nome.textContent = `Nome: ${user.name}`
+            const nome = document.createElement("p");
+            nome.textContent = `Nome: ${user.name}`;
 
-            const email = document.createElement("p")
-            email.textContent = `E-mail: ${user.email}`
+            const email = document.createElement("p");
+            email.textContent = `E-mail: ${user.email}`;
 
-            const img = document.createElement("img")
-            img.src = user.image
-            
-            card.appendChild(img)
-            divText.appendChild(nome)
-            divText.appendChild(email)
+            const img = document.createElement("img");
+            img.classList.add("img-foto");
+            img.src = user.image;
 
-            card.appendChild(divText)
+            const btn = document.createElement("button");
+            btn.classList.add("deleteUsuario");
+            btn.onclick = () => deleteUsuario(user.id);
 
-            lista.appendChild(card)
+            const imgBtn = document.createElement("img");
+            imgBtn.classList.add("img-remove");
+            imgBtn.src = "./img/remover.png";
+
+            card.appendChild(img);
+            divText.appendChild(nome);
+            divText.appendChild(email);
+
+            card.appendChild(divText);
+            card.appendChild(btn);
+
+            btn.appendChild(imgBtn);
+
+            lista.appendChild(card);
         });
     }
-    listarUsuarios()
+    listarUsuarios();
 
+    async function deleteUsuario(id) {
+
+        const confirmar = confirm("Tem ceerteza que deseja romover?");
+
+        if (!confirmar) return;
+
+        await fetch(`http://localhost:3000/usuarios/${id}`, {
+            method: "DELETE"
+        });
+
+        listarUsuarios();
+    }
 
 </script>
-
 </html>
